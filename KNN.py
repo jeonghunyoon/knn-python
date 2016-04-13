@@ -6,7 +6,7 @@ import operator
 x = [0, 0.5]
 datasets = array([[1,1],[1,0],[0,1],[0,0]])
 labels = array(['A', 'A', 'B', 'B'])
-k = 3
+k = 2
 """
 def classify(x, datasets, labels, k):
     datasets_size = datasets.shape[0]
