@@ -8,6 +8,8 @@ datasets = array([[1,1],[1,0],[0,1],[0,0]])
 labels = array(['A', 'A', 'B', 'B'])
 k = 2
 """
+
+
 def classify(x, datasets, labels, k):
     datasets_size = datasets.shape[0]
     sum_sqr_diff_matrix = ((tile(x, (datasets_size, 1)) - datasets) ** 2).sum(axis=1)
@@ -22,3 +24,14 @@ def classify(x, datasets, labels, k):
     class_predict = sorted(label_count.iteritems(), key=operator.itemgetter(1), reverse=True)
 
     return class_predict[0][0]
+
+
+def normalize(datasets):
+    column_min = datasets.min(0)
+    column_max = datasets.max(0)
+    ranges = column_max - column_min
+    row_num = datasets.shape[0]
+
+    normalized_datasets = (datasets - tile(column_min, (row_num, 1))) / tile(ranges, (row_num, 1))
+
+    return normalized_datasets, ranges, column_min
